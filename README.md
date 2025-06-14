@@ -1,12 +1,25 @@
-# vite-react-base
+# Bhavy's React + Vite Portfolio
+This is my personal portfolio website, built using React and Vite for lightning-fast performance and modern development experience. It features smooth animations, responsive design, and a clean component structure.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tech Stack
+React – UI library for building dynamic components
 
-Currently, two official plugins are available:
+Vite – Fast bundler with Hot Module Replacement
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Tailwind CSS – Utility-first CSS framework
 
-## Expanding the ESLint configuration
+Lucide Icons – Beautifully designed icon set
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+ESLint – Code quality and formatting rules
+
+## Features
+Hot Module Replacement (HMR) for fast development
+
+Custom Gooey background animation
+
+Interactive sections: About, Skills, Projects, Contact
+
+Responsive and mobile-friendly layout
+
+Easy to maintain and extend
+
