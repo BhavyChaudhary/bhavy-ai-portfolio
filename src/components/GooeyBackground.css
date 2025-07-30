@@ -149,3 +149,44 @@ html, body {
   left: -50%;
   opacity: 0.7;
 }
+
+
+/* Mobile-first responsive design */
+@media (max-width: 768px) {
+  /* Fix container padding on mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    max-width: 100%;
+  }
+
+  /* Fix navbar height on mobile */
+  #scroll-container {
+    top: 70px; /* Slightly smaller navbar on mobile */
+  }
+
+  /* Better mobile scrollbar */
+  #scroll-container::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  #scroll-container {
+    top: 65px;
+  }
+}

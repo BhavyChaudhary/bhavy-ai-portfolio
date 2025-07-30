@@ -21,7 +21,7 @@ export const Home = () => {
       {/* THE KEY: Scroll Container - starts below navbar, has its own scroll */}
       <div 
         id="scroll-container"
-        className="fixed top-20 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden"
+        className="fixed top-16 md:top-20 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden"
         style={{ scrollBehavior: 'smooth' }}
       >
         {/* All scrollable content goes here */}

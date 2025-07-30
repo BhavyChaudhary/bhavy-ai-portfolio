@@ -16,23 +16,55 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.screenY > 10);
+      // Listen to scroll container instead of window
+      const scrollContainer = document.getElementById('scroll-container');
+      if (scrollContainer) {
+        setIsScrolled(scrollContainer.scrollTop > 10);
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const scrollContainer = document.getElementById('scroll-container');
+    if (scrollContainer) {
+      scrollContainer.addEventListener("scroll", handleScroll);
+      return () => scrollContainer.removeEventListener("scroll", handleScroll);
+    }
   }, []);
+
+  // Handle smooth scrolling within the scroll container
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const scrollContainer = document.getElementById('scroll-container');
+    const targetId = href.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+    
+    if (scrollContainer && targetElement) {
+      const containerRect = scrollContainer.getBoundingClientRect();
+      const targetRect = targetElement.getBoundingClientRect();
+      const scrollTop = scrollContainer.scrollTop;
+      const targetPosition = targetRect.top - containerRect.top + scrollTop;
+      
+      scrollContainer.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav
       className={cn(
         "fixed w-full z-40 transition-all duration-300",
-        isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
+        isScrolled 
+          ? "py-2 md:py-3 bg-transparent/80  " 
+          : "py-3 md:py-5"
       )}
     >
-      <div className="container flex items-center justify-between">
+      <div className="container mx-auto px-4 flex items-center justify-between">
         <a
-          className="text-xl font-bold text-primary flex items-center"
+          className="text-lg md:text-xl font-bold text-primary flex items-center"
           href="#hero"
+          onClick={(e) => handleNavClick(e, "#hero")}
         >
           <span className="relative z-10">
             <span className="text-glow text-foreground"> Bhavy's </span>{" "}
@@ -41,12 +73,13 @@ export const Navbar = () => {
         </a>
 
         {/* desktop nav */}
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex space-x-6 lg:space-x-8">
           {navItems.map((item, key) => (
             <a
               key={key}
               href={item.href}
-              className="text-foreground/80 hover:text-primary transition-colors duration-300"
+              onClick={(e) => handleNavClick(e, item.href)}
+              className="text-foreground/80 hover:text-primary transition-colors duration-300 text-sm lg:text-base"
             >
               {item.name}
             </a>
@@ -54,31 +87,30 @@ export const Navbar = () => {
         </div>
 
         {/* mobile nav */}
-
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden p-2 text-foreground z-50"
+          className="md:hidden p-2 text-foreground z-50 relative"
           aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}{" "}
+          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
 
         <div
           className={cn(
-            "fixed inset-0 bg-background/95 backdroup-blur-md z-40 flex flex-col items-center justify-center",
+            "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
             "transition-all duration-300 md:hidden",
             isMenuOpen
               ? "opacity-100 pointer-events-auto"
               : "opacity-0 pointer-events-none"
           )}
         >
-          <div className="flex flex-col space-y-8 text-xl">
+          <div className="flex flex-col space-y-6 text-lg">
             {navItems.map((item, key) => (
               <a
                 key={key}
                 href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
               </a>
