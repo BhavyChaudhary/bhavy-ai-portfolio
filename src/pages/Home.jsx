@@ -9,29 +9,31 @@ import { ContactSection } from "../components/ContactSection";
 import { Footer } from "../components/Footer";
 import GooeyBackground from "../components/GooeyBackground";
 
-
-
 export const Home = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* Theme Toggle */}
-      {/* Background Effects */}
-      // Inside the component:
+    <div className="h-screen overflow-hidden bg-background text-foreground">
+      {/* Fixed Background Effects */}
       <GooeyBackground />
-
-      {/* Navbar */}
+      
+      {/* Fixed Navbar */}
       <Navbar />
-      {/* Main Content */}
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
-
-      {/* Footer */}
-      <Footer />
+      
+      {/* THE KEY: Scroll Container - starts below navbar, has its own scroll */}
+      <div 
+        id="scroll-container"
+        className="fixed top-20 left-0 right-0 bottom-0 overflow-y-auto overflow-x-hidden"
+        style={{ scrollBehavior: 'smooth' }}
+      >
+        {/* All scrollable content goes here */}
+        <main>
+          <HeroSection />
+          <AboutSection />
+          <SkillsSection />
+          <ProjectsSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 };
